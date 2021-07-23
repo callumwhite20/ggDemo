@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Trophies</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-content">
+    <div *ngFor="let trophy of trophyData.trophies" class="modal-trophy">
+      <img src="{{trophy.cover.url}}"/>
+      <h6>{{trophy.name}}</h6>
+      <p *ngIf="!trophy.hidden">{{trophy.description}}</p>
+      <p *ngIf="trophy.hidden">
+        This Achievement is secret.<br>The more you play, the more likely you are to unlock it!
+      </p>
+      <p>{{trophy.percentage_obtained}}%</p>
+    </div>
+  </div>
+</ion-content>

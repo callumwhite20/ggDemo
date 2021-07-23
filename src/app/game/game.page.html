@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Game Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-content" *ngIf="gameData">
+    <div class="detail-section" id="detail-section-id">
+      <h1>{{gameData.game.name}}</h1>
+      <h4>Details</h4>
+
+      <h6 class="no-margin-bot">Publisher</h6>
+      <p class="no-margin-top">{{gameData.game.publisher_name}}</p>
+
+      <h6 class="no-margin-bot">Genre<span *ngIf="genres.length > 1">s</span></h6>
+      <p class="no-margin-top">{{genreText}}</p>
+
+      <h6 class="no-margin-bot">Relese Date</h6>
+      <p class="no-margin-top">{{releaseDate}}</p>
+
+      <p>
+        <img src="{{gameData.game.cover.url}}" align="left" class="game-cover"/>
+        <span [innerHtml]="shortenedDesc(gameData.game.description)"></span> <a (click)="fullDescription()" *ngIf="seeMore">Read More</a>
+      </p>
+    </div>
+
+    <div class="trophies detail-section" *ngIf="trophyData && trophyData.trophies && trophyData.trophies.length > 0">
+      <h4>Trophies - Showing {{trophyData.showing}} of {{trophyData.pagination['Total-Count']}}</h4>
+      <ion-button size="small" class="see-more" (click)="seeMoreTrophies()">See More</ion-button>
+
+      <div class="trophy" *ngFor="let trophy of trophyData.trophies">
+        <img src="{{trophy.cover.url}}" class="trophy-cover"/>
+        <p>{{trophy.name}}</p>
+      </div>
+    </div>
+
+    <div class="media detail-section">
+      <h4>Media Gallery</h4>
+      <ion-button size="small" class="see-more" (click)="seeMoreMedia()">See More</ion-button>
+
+      <div class="preview" *ngIf="preview">
+        <video poster="{{preview.still.url}}"></video>
+      </div>
+
+      <div class="media-item" *ngFor="let media of shortMedia">
+        <img src="{{media.capture.url}}">
+      </div>
+
+      <div class="clear-fix"></div>
+    </div>
+
+    <div class="editions detail-section" *ngIf="gameData.products.has_products && productData">
+      <h4>Editions and Bundles</h4>
+      <ion-button size="small" class="see-more" *ngIf="productData.total > 9" (click)="seeMoreProducts()">See More</ion-button>
+
+      <div class="product" *ngFor="let product of products">
+        <img src="{{product.cover.url}}" class="product-cover"/>
+        <p>{{product.name}}</p>
+      </div>
+    </div>
+
+    <div class="community detail-section" *ngIf="gameData.owners.has_owners">
+      <h4>Community - {{gameData.owners.total_owners}}</h4>
+    </div>
+  </div>
+</ion-content>

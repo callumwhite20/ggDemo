@@ -1,0 +1,41 @@
+.game-cover {
+    width: 45%;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.trophy,
+.product {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 3%;
+}
+
+.trophy-cover,
+.product-cover {
+    width: 75%;
+}
+
+.media-item {
+    width: 50%;
+    float: left;
+}
+
+.preview video {
+    width: 100%;
+}
+
+.detail-section{
+    position: relative;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid grey;
+    }
+    
+    .see-more {
+        position: absolute;
+        right: 0;
+        top: -7px;
+    }
+}

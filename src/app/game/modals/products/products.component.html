@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editions and Bundles</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-content">
+    <div *ngFor="let product of products" class="modal-product">
+      <img src="{{product.cover.url}}"/>
+      <h6>{{product.name}}</h6>
+    </div>
+  </div>
+</ion-content>
+  

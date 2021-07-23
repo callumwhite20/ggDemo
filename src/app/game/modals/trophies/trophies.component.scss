@@ -1,0 +1,9 @@
+.modal-trophy {
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+
+    &:nth-child(odd) {
+        margin-right: 9%;
+    }
+}

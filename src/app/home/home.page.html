@@ -1,20 +1,65 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Games
     </ion-title>
   </ion-toolbar>
+
+  <ion-item lines="full">
+    <ion-input [(ngModel)]="searchText"></ion-input>
+    <ion-button slot="end" size="small" (click)="getList()">
+      Search
+    </ion-button>
+  </ion-item>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list class="display-list" *ngIf="data.games">
+    <ion-item *ngFor="let game of data.games" (click)="goToGame(game)">
+      <ion-img *ngIf="game.cover" src="{{game.cover.url}}" slot="start" class="small-img"></ion-img>
+      <ion-text class="game">
+        <p class="game-name">{{game.name}}</p>
+        <sub *ngIf="game.description" [innerHtml]="stripDescription(game.description)" class="game-description"></sub>
+      </ion-text>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <ion-item *ngIf="data.games.length === 0">
+      <ion-text>
+        <p>No games found matching your search</p>
+      </ion-text>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer *ngIf="data.pagination">
+  <ion-toolbar>
+    <ion-buttons class="pages" slot="start">
+      <ion-button class="double-chevron" (click)="goTo(1)" size="small" [disabled]="data.pagination['Current-Page'] == '1'">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="goBack()" size="small" [disabled]="data.pagination['Current-Page'] == '1'">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+
+      <ion-text class="page-number">{{data.pagination['Current-Page']}} of {{data.pagination['Total-Pages']}}</ion-text>
+
+      <ion-button (click)="goForward()" size="small" [disabled]="data.pagination['Current-Page'] == data.pagination['Total-Pages']">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="double-chevron" (click)="goTo(data.pagination['Total-Pages'])" size="small" [disabled]="data.pagination['Current-Page'] == data.pagination['Total-Pages']">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons class="per-page" slot="end">
+      <ion-text class="page-number no-margin">Per Page:</ion-text>
+
+      <ion-button (click)="showPerPage()" size="small">
+        {{data.pagination['Page-Items']}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

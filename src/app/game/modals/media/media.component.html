@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Media</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-content">
+    <div *ngFor="let mediaItem of media">
+      <img src="{{mediaItem.capture ? mediaItem.capture.url : mediaItem.still.url}}">
+    </div>
+  </div>
+</ion-content>

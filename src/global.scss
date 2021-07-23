@@ -24,3 +24,30 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.page-content {
+    padding: 12px;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-margin-bot {
+    margin-bottom: 0 !important;
+}
+
+.no-margin-top {
+    margin-top: 0 !important;
+}
+
+.display-list {
+    :last-child {
+        --inner-border-width: 0;
+    }
+}
+
+.clear-fix {
+    clear: both;
+}
